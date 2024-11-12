@@ -32,8 +32,8 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
-          OUTPUT_NAME=main-${{ matrix.goos }}-${{ matrix.goarch }}-{{ matrix.service }}
-          go build -ldflags="-s -w" -o $OUTPUT_NAME ./cmd/{{ matrix.service }}/main.go
+          OUTPUT_NAME=main-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.service }}
+          go build -ldflags="-s -w" -o $OUTPUT_NAME ./cmd/${{ matrix.service }}/main.go
           echo "OUTPUT_NAME=$OUTPUT_NAME" >> $GITHUB_ENV
 
       - name: Commit and Push Binaries
