@@ -17,6 +17,7 @@ jobs:
       matrix:
         goos: [linux]
         goarch: [arm64, amd64]
+        service: [test]
     steps:
       - uses: actions/checkout@v3
 
@@ -31,8 +32,8 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
-          OUTPUT_NAME=main-${{ matrix.goos }}-${{ matrix.goarch }}-v1
-          go build -ldflags="-s -w" -o $OUTPUT_NAME .
+          OUTPUT_NAME=main-${{ matrix.goos }}-${{ matrix.goarch }}-{{ matrix.service }}
+          go build -ldflags="-s -w" -o $OUTPUT_NAME ./cmd/{{ matrix.service }}/main.go
           echo "OUTPUT_NAME=$OUTPUT_NAME" >> $GITHUB_ENV
 
       - name: Commit and Push Binaries
