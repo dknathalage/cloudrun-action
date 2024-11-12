@@ -5,4 +5,4 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: ../../cmd/test/action.yml@main
+      - uses: ../actions/test/action.yml@main
