@@ -32,7 +32,7 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
-          OUTPUT_NAME=main-${{ matrix.goos }}-${{ matrix.goarch }}-${{ matrix.service }}
+          OUTPUT_NAME=./github/actions/${{ matrix.service }}/main-${{ matrix.goos }}-${{ matrix.goarch }}
           go build -ldflags="-s -w" -o $OUTPUT_NAME ./cmd/${{ matrix.service }}/main.go
           echo "OUTPUT_NAME=$OUTPUT_NAME" >> $GITHUB_ENV
 
