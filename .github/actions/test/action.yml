@@ -3,10 +3,11 @@ inputs:
   context:
     description: "The context to use for the Docker build"
     required: true
-    default: "../../"
+    default: ../../
 
 runs:
   using: docker
-  image: Dockerfile
-  args:
-    - ${{ inputs.context }}
+  image:
+    build:
+      context: ../../
+      dockerfile: Dockerfile
