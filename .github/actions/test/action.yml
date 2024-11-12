@@ -12,4 +12,5 @@ runs:
         go-version: 1.23
 
     - name: Go run
+      shell: bash
       run: go run ./cmd/test/main.go
