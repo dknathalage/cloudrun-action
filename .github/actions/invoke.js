@@ -2,7 +2,6 @@ const childProcess = require("child_process");
 const os = require("os");
 const process = require("process");
 const core = require("@actions/core");
-const github = require("@actions/github");
 
 function chooseBinary() {
   const platform = os.platform();
