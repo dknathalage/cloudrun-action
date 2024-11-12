@@ -6,6 +6,6 @@ COPY ./ ./
 
 RUN go mod download
 
-RUN go build -o /bin/app ./cmd/cloudrun-deploy/cloudrun-deploy.go
+RUN go build -o /bin/app ./cmd/main.go
 
 ENTRYPOINT ["app"]
