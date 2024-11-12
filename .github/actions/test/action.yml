@@ -3,5 +3,5 @@ name: Deploy Cloud Run Service
 runs:
   using: docker
   image: ../../../Dockerfile
-  build-args:
-    GO_MAIN: cmd/test/main.go
+  build-args: |
+    GO_MAIN_PATH=cmd/test/main.go
