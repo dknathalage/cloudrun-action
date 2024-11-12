@@ -4,9 +4,9 @@ WORKDIR /app
 
 COPY ../../ ./
 
-# print the current directory and the files in it
+# print the file that are in directory we are copying
 RUN pwd
-RUN ls -la
+RUN ls -la ../../
 
 RUN go mod download
 
