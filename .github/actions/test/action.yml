@@ -1,16 +1,11 @@
 name: Deploy Cloud Run Service
 
 input:
-  service-name:
-    description: "The name of the Cloud Run service"
+  action:
+    description: "The action to perform"
     required: true
-  region:
-    description: "The region of the Cloud Run service"
-  image:
-    description: "The image to deploy"
+    default: "test"
 
 runs:
   using: node20
   main: ../invoke.js
-  with:
-    action: test

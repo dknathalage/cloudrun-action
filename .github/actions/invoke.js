@@ -28,7 +28,7 @@ function chooseBinary() {
 }
 
 function main() {
-  const action = core.getInput("who-to-greet");
+  const action = core.getInput("action");
   const binary = chooseBinary();
   const mainScript = `${__dirname}/${action}/${binary}`;
   const spawnSyncReturns = childProcess.spawnSync(mainScript, {
