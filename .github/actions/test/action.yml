@@ -10,7 +10,7 @@ input:
     description: "The image to deploy"
 
 runs:
-  using: node16
+  using: node20
   main: ../invoke.js
-  env:
-    ACTION: test
+  with:
+    action: test

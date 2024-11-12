@@ -1,6 +1,8 @@
 const childProcess = require("child_process");
 const os = require("os");
 const process = require("process");
+const core = require("@actions/core");
+const github = require("@actions/github");
 
 function chooseBinary() {
   const platform = os.platform();
@@ -26,7 +28,7 @@ function chooseBinary() {
 }
 
 function main() {
-  const action = process.env.ACTION;
+  const action = core.getInput("who-to-greet");
   const binary = chooseBinary();
   const mainScript = `${__dirname}/${action}/${binary}`;
   const spawnSyncReturns = childProcess.spawnSync(mainScript, {
