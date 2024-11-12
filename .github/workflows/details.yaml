@@ -1,0 +1,46 @@
+name: Build and Push Binaries
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write # Allows the workflow to push changes to the repository
+
+jobs:
+  build:
+    if: github.actor != 'github-actions[bot]' # Prevents infinite loop by skipping runs triggered by the bot itself
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        goos: [linux]
+        goarch: [arm64, amd64]
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: "1.20" # Specify the Go version you want to use
+
+      - name: Build
+        env:
+          CGO_ENABLED: 0
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+        run: |
+          OUTPUT_NAME=main-${{ matrix.goos }}-${{ matrix.goarch }}-v1
+          go build -ldflags="-s -w" -o $OUTPUT_NAME .
+          echo "OUTPUT_NAME=$OUTPUT_NAME" >> $GITHUB_ENV
+
+      - name: Commit and Push Binaries
+        env:
+          OUTPUT_NAME: ${{ env.OUTPUT_NAME }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add $OUTPUT_NAME
+          git commit -m "Add binary $OUTPUT_NAME [skip ci]"
+          git push origin HEAD:${{ github.ref }}
