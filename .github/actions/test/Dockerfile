@@ -6,7 +6,7 @@ COPY ../../ ./
 
 # print the file that are in directory we are copying
 RUN pwd
-RUN ls -la ../../
+RUN ls -la
 
 RUN go mod download
 
