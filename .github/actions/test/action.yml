@@ -1,19 +1,12 @@
 name: Deploy Cloud Run Service
 inputs:
-  service:
-    description: "Cloud Run service name"
+  context:
+    description: "The context to use for the Docker build"
     required: true
-  region:
-    description: "Cloud Run region"
-    required: true
-  project:
-    description: "GCP project ID"
-    required: true
+    default: "../../"
 
 runs:
   using: docker
   image: Dockerfile
-  env:
-    SERVICE: ${{ inputs.service }}
-    REGION: ${{ inputs.region }}
-    PROJECT: ${{ inputs.project }}
+  with:
+    context: ${{ inputs.context }}
