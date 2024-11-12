@@ -1,7 +1,15 @@
 name: Deploy Cloud Run Service
 
 runs:
-  using: docker
-  image: ../../../Dockerfile
-  build-args: |
-    GO_MAIN_PATH=cmd/test/main.go
+  using: "composite"
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Go setup
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.23
+
+    - name: Go run
+      run: go run ./cmd/test/main.go
